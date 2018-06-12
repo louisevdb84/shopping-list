@@ -7,6 +7,10 @@ import { UseListComponent } from './use-list/use-list.component';
 import { CurrentComponent } from './create-list/current/current.component';
 import { RepeatingComponent } from './create-list/repeating/repeating.component';
 import { ItemsService } from './Services/items.service';
+import { DoneComponent } from './use-list/done/done/done.component';
+import { TodoComponent } from './use-list/todo/todo/todo.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './header/header/header.component';
 
 @NgModule({
   declarations: [
@@ -14,10 +18,14 @@ import { ItemsService } from './Services/items.service';
     CreateListComponent,
     UseListComponent,
     CurrentComponent,
-    RepeatingComponent
+    RepeatingComponent,
+    DoneComponent,
+    TodoComponent,
+    HeaderComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [ItemsService],
   bootstrap: [AppComponent]
