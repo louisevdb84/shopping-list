@@ -1,2 +1,15 @@
-repeating works!
+<h3>Repeating List</h3>
 
+<div *ngFor = "let item of items" class="container">
+  <div class="row">
+    <div class="col-md-2">
+        {{item.name}}
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-primary" (click) = "onAdd()">Add</button>
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-danger" (click) = "onRemove()">Remove</button>
+    </div>
+  </div>
+</div>
