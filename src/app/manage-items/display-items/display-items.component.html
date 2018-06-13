@@ -1,0 +1,24 @@
+<input type="text">
+<button>Search</button>
+<table class="table table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Shop</th>
+    <th>Sort</th>
+    <th>Is Repeating</th>    
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let item of items">
+      <td>{{item.name}}</td>
+      <td>{{item.shop.name}}</td>
+      <td>{{item.sorting}}</td>
+      <td>{{item.isRepeating}}</td>
+      <td>
+        <button class="btn btn-primary">Edit</button>
+        <button class="btn btn-danger">Delete</button>
+      </td>      
+    </tr>
+  </tbody>
+</table> 
+

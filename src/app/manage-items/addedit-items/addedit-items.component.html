@@ -1,0 +1,86 @@
+<div class="row">
+  
+    <div class="col-xs-9">
+      <h3>Add Item</h3>
+      <form>        
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            class="form-control"
+            #nameInput
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="shops">Shops</label>
+            <select   
+                id="shops" 
+                class="form-control"
+                #shopInput>
+                  <option *ngFor = "let shop of shops" value={{shop.name}}>{{shop.name}}</option>                
+            </select>          
+          </div>          
+
+        <div class="form-group">
+          <label for="amount">Sorting</label>
+          <input 
+            type="number" 
+            id="sorting" 
+            class="form-control"
+            #sortingInput
+            >
+        </div>        
+        <div class="form-group">
+            <label for="isRepeating">Is Repeating</label>
+            <select   
+                id="isRepeating" 
+                class="form-control"
+                #isRepeatingInput>
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+            </select>          
+          </div>          
+
+        <div class="row">
+          <div class="col-xs-12">
+            <button class="btn btn-success" type="submit" (click)="onAddItem()">Add</button>            
+            <button class="btn btn-primary" type="button">Clear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-xs-3">
+        <h3>Add shop</h3>
+          <form>        
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  class="form-control"
+                  #nameInput
+                  >
+              </div>
+      
+              <div class="row">
+                <div class="col-xs-12">
+                  <button class="btn btn-success" type="submit" (click)="onAddItem()">Add</button>            
+                  <button class="btn btn-primary" type="button">Clear</button>
+                </div>
+              </div>
+            </form>
+            <div class="row" *ngFor = "let shop of shops">
+              <div class="col-xs-7">
+                  {{shop.name}}
+              </div>
+              <div class="col-xs-2">              
+                  <button class="btn btn-default btn-sm">Edit</button>                
+              </div>
+              <div class="col-xs-2">                            
+                <button class="btn btn-danger btn-sm">Delete</button>            
+            </div>
+            </div>        
+      </div>
+  </div>

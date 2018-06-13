@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from '../../../../Models/item.model';
+import { ItemsService } from '../../../Services/items.service';
 
 @Component({
   selector: 'app-done',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoneComponent implements OnInit {
 
-  constructor() { }
+  items: Item[];
+
+  constructor(private itemsService: ItemsService) { }
 
   ngOnInit() {
+    this.items = this.itemsService.getDone();
   }
 
 }

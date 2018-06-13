@@ -11,6 +11,10 @@ import { DoneComponent } from './use-list/done/done/done.component';
 import { TodoComponent } from './use-list/todo/todo/todo.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header/header.component';
+import { ManageItemsComponent } from './manage-items/manage-items.component';
+import { DisplayItemsComponent } from './manage-items/display-items/display-items.component';
+import { AddeditItemsComponent } from './manage-items/addedit-items/addedit-items.component';
+import { ShopsService } from './services/shops.service';
 
 @NgModule({
   declarations: [
@@ -21,13 +25,16 @@ import { HeaderComponent } from './header/header/header.component';
     RepeatingComponent,
     DoneComponent,
     TodoComponent,
-    HeaderComponent
+    HeaderComponent,    
+    ManageItemsComponent,
+    DisplayItemsComponent,
+    AddeditItemsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [ItemsService],
+  providers: [ItemsService, ShopsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
