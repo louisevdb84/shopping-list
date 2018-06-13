@@ -1,4 +1,13 @@
-<h3>TODO</h3>
+<h3>Shopping List</h3>
+<div class="form-group">  
+  <select   
+      id="shops" 
+      class="form-control"
+      (change)="onShopSelect($event)"
+      #shopInput>
+        <option *ngFor = "let shop of shops" value={{shop.name}}>{{shop.name}}</option>                
+  </select>          
+</div>          
 <label *ngFor = "let item of items" class="container">{{item.name}}
     <input type="checkbox">
     <span class="checkmark"></span>

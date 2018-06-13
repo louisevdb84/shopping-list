@@ -1,4 +1,6 @@
 import { items } from '../../Data/items';
+import { Item } from '../../models/item.model';
+import { Shop } from '../../models/shop.model';
 
 export class ItemsService {
   getItems() {
@@ -37,7 +39,15 @@ export class ItemsService {
       item.status.name === "Done")
       .slice()
       .sort((a, b) =>
-        a.sorting - b.sorting);;
+        a.sorting - b.sorting);
+  }
+
+  getItemsByShop(itemsArray: Item[], shop: Shop) {
+    return itemsArray.filter(item =>
+      item.shop === shop)
+      .slice()
+      .sort((a, b) =>
+        a.sorting - b.sorting);
   }
   statusCopyToCurrent() {
     
