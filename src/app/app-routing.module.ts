@@ -5,6 +5,7 @@ import { CreateListComponent } from './create-list/create-list.component';
 import { ManageItemsComponent } from './manage-items/manage-items.component';
 import { DisplayItemsComponent } from './manage-items/display-items/display-items.component';
 import { AddeditItemsComponent } from './manage-items/addedit-items/addedit-items.component';
+import { AddeditShopsComponent } from './manage-shops/addedit-shops/addedit-shops.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/uselist', pathMatch: 'full' },
@@ -15,7 +16,9 @@ const appRoutes: Routes = [
       { path: 'display', component: DisplayItemsComponent },
       { path: 'new', component: AddeditItemsComponent },
       { path: ':id/edit', component: AddeditItemsComponent}
-  ] },  
+    ]
+  },  
+  { path: 'shops', component: AddeditShopsComponent },
 ];
 
 
