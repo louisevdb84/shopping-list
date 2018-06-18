@@ -1,15 +1,17 @@
 <div class="row">
   
     <div class="col-xs-12">
-      <h3>Add Item</h3>
-      <form>        
+      <h3>Add Item</h3>      
+      <form (ngSubmit)="onAddItem()" #f="ngForm">      
         <div class="form-group">
           <label for="name">Name</label>
           <input 
             type="text" 
             id="name" 
             class="form-control"
-            #nameInput
+            ngModel
+            name = "name"
+            required
             >
         </div>
 
@@ -18,8 +20,9 @@
             <select   
                 id="shops" 
                 class="form-control"
-                #shopInput>
-                  <option *ngFor = "let shop of shops" value={{shop.name}}>{{shop.name}}</option>                
+                ngModel = "Shop"
+                name="shops">
+                  <option *ngFor = "let shop of shops" [ngValue]="shop">{{shop.name}}</option>                
             </select>          
           </div>          
 
@@ -28,8 +31,9 @@
           <input 
             type="number" 
             id="sorting" 
+            name="sorting"
             class="form-control"
-            #sortingInput
+            ngModel
             >
         </div>        
         <div class="form-group">
@@ -37,7 +41,9 @@
             <select   
                 id="isRepeating" 
                 class="form-control"
-                #isRepeatingInput>
+                name= "isRepeating"
+                ngModel
+                >
                   <option value="true">true</option>
                   <option value="false">false</option>
             </select>          
@@ -45,8 +51,7 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <button class="btn btn-success" type="submit" (click)="onAddItem()">Add</button>            
-            <button class="btn btn-primary" type="button">Clear</button>
+            <button class="btn btn-success" type="submit">Add</button>                        
           </div>
         </div>
       </form>

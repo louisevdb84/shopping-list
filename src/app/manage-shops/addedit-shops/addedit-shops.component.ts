@@ -28,6 +28,7 @@ export class AddeditShopsComponent implements OnInit {
 
   onAddItem() {
     let newShop: Shop = new Shop(null, this.shopForm.value.shopName);
+    this.shopForm.resetForm();
     this.shopsService.newShop(newShop)
       .subscribe(
         (res) => this.getShops(),
