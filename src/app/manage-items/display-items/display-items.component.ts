@@ -14,6 +14,19 @@ export class DisplayItemsComponent implements OnInit {
 
   ngOnInit() {
     this.items = this.itemsService.getPermanent();
+    this.getItems();
+  }
+
+  getItems() {    
+      this.itemsService.getItemsByStatus('items', 'Permanent')
+        .subscribe(
+        (res) => {
+          this.items = res.json();
+          // this.items.sort((a, b) => {
+          //   a.sorting - b.sorting;
+          // })
+        },        
+        (err) => console.log(err));    
   }
 
 }
