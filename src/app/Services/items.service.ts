@@ -1,71 +1,51 @@
-import { items } from '../../Data/items';
+import { Injectable } from "@angular/core";
+import { Http} from "@angular/http";
 import { Item } from '../../models/item.model';
 import { Shop } from '../../models/shop.model';
+import { Subject } from "rxjs";
 
-export class ItemsService {
-  getItems() {
-    return items.slice().
-      sort((a, b) =>
-        a.sorting - b.sorting);;
-  }
-
-  getPermanent() {
-    return items.filter(item =>
-      item.status.name === "Permanent")
-      .slice()
-      .sort((a, b) =>
-        a.sorting - b.sorting);;
-  }
-
+@Injectable()
+export class ItemsService {  
+  itemsChanged = new Subject();
   
-  getCopy() {
-    return items.filter(item =>
-      item.status.name === "Copy")
-      .slice()
-      .sort((a, b) =>
-        a.sorting - b.sorting);;
+  constructor(private http: Http) { }
+  url: string = 'http://localhost:3050/';  
+
+  get(path) {
+    return this.http.get(this.url + path);      
   }
 
-  getCurrent() {
-    return items.filter(item =>
-      item.status.name === "Current")
-      .slice()
-      .sort((a, b) =>
-        a.sorting - b.sorting);
+  getItemsByStatus(path, status) {       
+    return this.http.post(this.url + path, {status: status});      
+  }
+  
+  newItem(item: Item) {
+    return this.http.post('http://localhost:3050/items/new', item);
   }
 
-  getDone() {
-    return items.filter(item =>
-      item.status.name === "Done")
-      .slice()
-      .sort((a, b) =>
-        a.sorting - b.sorting);
+  newItems(items: Item[]) {        
+    return this.http.post('http://localhost:3050/items/copy', items);
   }
 
-  getItemsByShop(itemsArray: Item[], shop: Shop) {
-    return itemsArray.filter(item =>
-      item.shop === shop)
-      .slice()
-      .sort((a, b) =>
-        a.sorting - b.sorting);
+  editItem(item: Item) { 
+    return this.http.put('http://localhost:3050/items/' + item._id + '/edit', item);      
   }
-  statusCopyToCurrent() {
-    
+
+  removeItem(id: string) {
+    return this.http.delete('http://localhost:3050/items/delete', {body: {id: id}});
+  }
+
+  removeAllByStatus(status: string){
+    return this.http.delete('http://localhost:3050/items/deleteAll', {body: {status: status}});
   }
 }
 
 
-// import { Injectable } from "@angular/core";
-// import { Http, Headers } from "@angular/http";
-// import { Shop } from '../../Models/shop.model';
 
-// @Injectable()
-// export class ShopsService {
-//   constructor(private http: Http) { }
+
+
   
-//   getShops() {
-//     return this.http.get('http://localhost:3050/shops');    
-//   }
+
 
 //   getShop(name: string) {
 //     //return shops.find(shop => shop.name === name);

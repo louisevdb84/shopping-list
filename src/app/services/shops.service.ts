@@ -1,9 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
 import { Shop } from '../../Models/shop.model';
+import { Subject } from "rxjs";
 
 @Injectable()
 export class ShopsService {
+
+  shopsChanged = new Subject<Shop[]>();  
   constructor(private http: Http) { }
   
   getShops() {

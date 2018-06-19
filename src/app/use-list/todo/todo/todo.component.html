@@ -9,6 +9,8 @@
   </select>          
 </div>          
 <label *ngFor = "let item of items" class="container">{{item.name}}
-    <input type="checkbox">
+    <input 
+    type="checkbox"    
+    (click) = "onDone(item)">
     <span class="checkmark"></span>
   </label>

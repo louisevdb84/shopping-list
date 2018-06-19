@@ -13,7 +13,20 @@ export class CurrentComponent implements OnInit {
   constructor(private itemsService: ItemsService) { }
 
   ngOnInit() {
-    this.items = this.itemsService.getCurrent();    
+    this.getItems("Current");
+    this.itemsService.itemsChanged
+      .subscribe(
+      (res) => this.getItems("Current")        
+    )
+  }
+
+  getItems(status) {    
+    this.itemsService.getItemsByStatus('items', status)
+      .subscribe(
+      (res) => {        
+          this.items = res.json();                    
+      },        
+      (err) => console.log(err));    
   }
 
 }

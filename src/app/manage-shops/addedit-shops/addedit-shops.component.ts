@@ -1,28 +1,39 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ShopsService } from '../../services/shops.service';
 import { Shop } from '../../../Models/shop.model';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-addedit-shops',
   templateUrl: './addedit-shops.component.html',
   styleUrls: ['./addedit-shops.component.css']
 })
-export class AddeditShopsComponent implements OnInit {
+export class AddeditShopsComponent implements OnInit, OnDestroy {
   @ViewChild('shopForm') shopForm: NgForm;
-
+  private subscription: Subscription;
   shops : Shop[];
   
   constructor(private shopsService: ShopsService) { }
 
   ngOnInit() {
     this.getShops();
+    this.subscription = this.shopsService.shopsChanged
+      .subscribe(
+      (shops: Shop[]) => {
+        this.shops = shops;
+        }
+      );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   getShops() {
     this.shopsService.getShops()
       .subscribe(
-      (res) => {this.shops = res.json()},
+      (res) => {this.shopsService.shopsChanged.next(res.json())},
       (err) => console.log(err));
   }
 

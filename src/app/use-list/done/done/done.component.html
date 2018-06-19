@@ -1,5 +1,7 @@
 <h3>Done</h3>
-<label *ngFor = "let item of items" class="container">{{item.name}}
-    <input type="checkbox">
-    <span class="checkmark"></span>
+<label *ngFor = "let item of items" class="container">{{item.name}}   
   </label>
+
+<button class="btn btn-primary" (click)="removeAll()">
+  Remove All
+</button>

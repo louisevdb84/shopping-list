@@ -1,6 +1,10 @@
 <h3>Current List</h3>
-<label *ngFor = "let item of items" class="container">{{item.name}}
-    <input type="checkbox">
-    <span class="checkmark"></span>
-  </label>
-
+<div *ngFor = "let item of items" class="container">
+  <div class="row">
+    <div class="col-md-4">
+        {{item.name}}
+    </div>    
+    <button class="btn btn-danger">Remove</button>
+  </div>
+</div>
+<button class="btn btn-primary">Add</button>

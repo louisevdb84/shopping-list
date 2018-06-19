@@ -3,14 +3,14 @@
 
 <div *ngFor = "let item of items" class="container">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-4">
         {{item.name}}
     </div>
     <div class="col-md-1">
-        <button class="btn btn-primary" (click) = "onAdd()">Add</button>
+        <button class="btn btn-primary" (click) = "onAdd(item)">Add</button>
     </div>
     <div class="col-md-1">
-        <button class="btn btn-danger" (click) = "onRemove()">Remove</button>
+        <button class="btn btn-danger" (click) = "onRemove(item._id)">Remove</button>
     </div>
   </div>
 </div>

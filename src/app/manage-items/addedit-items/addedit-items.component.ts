@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ShopsService } from '../../services/shops.service';
 import { Shop } from '../../../Models/shop.model';
 import { NgForm } from '@angular/forms';
@@ -14,7 +14,7 @@ import { StatusService } from '../../services/status.service';
 })
 export class AddeditItemsComponent implements OnInit {
   @ViewChild('f') itemForm: NgForm;
-
+  
   shops: Shop[];
   status: Status[];
   
@@ -45,7 +45,7 @@ export class AddeditItemsComponent implements OnInit {
   onAddItem() {    
     const { name, shops, sorting, isRepeating } = this.itemForm.value;            
     let item: Item = new Item(
-      name, shops, sorting, isRepeating,
+      null, name, shops, sorting, isRepeating,
         this.status.find(status => status.name === "Permanent")
     );    
 
@@ -53,7 +53,7 @@ export class AddeditItemsComponent implements OnInit {
 
     this.itemsService.newItem(item)
       .subscribe(
-        (res) => console.log(res.json()),
+        (res) => this.itemsService.itemsChanged.next(),
         (err) => console.log(err)
     )    
   }
