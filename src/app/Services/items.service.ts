@@ -7,6 +7,7 @@ import { Subject } from "rxjs";
 @Injectable()
 export class ItemsService {  
   itemsChanged = new Subject();
+  startedEditing = new Subject<Item>();
   
   constructor(private http: Http) { }
   url: string = 'http://localhost:3050/';  

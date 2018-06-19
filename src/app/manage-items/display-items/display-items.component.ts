@@ -39,7 +39,7 @@ export class DisplayItemsComponent implements OnInit, OnDestroy {
   }
 
   onEdit(item: Item) {
-    console.log(item);
+    this.itemsService.startedEditing.next(item);
   }
 
   onDelete(item: Item) {

@@ -20,6 +20,7 @@ import { ShopsService } from './services/shops.service';
 import { StatusService } from './services/status.service';
 import { ManageShopsComponent } from './manage-shops/manage-shops/manage-shops.component';
 import { AddeditShopsComponent } from './manage-shops/addedit-shops/addedit-shops.component';
+import { DisplayShopsComponent } from './manage-shops/display-shops/display-shops.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AddeditShopsComponent } from './manage-shops/addedit-shops/addedit-shop
     DisplayItemsComponent,
     AddeditItemsComponent,
     ManageShopsComponent,
-    AddeditShopsComponent    
+    AddeditShopsComponent,
+    DisplayShopsComponent
   ],
   imports: [
     BrowserModule,

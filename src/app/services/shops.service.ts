@@ -6,19 +6,25 @@ import { Subject } from "rxjs";
 @Injectable()
 export class ShopsService {
 
-  shopsChanged = new Subject<Shop[]>();  
+  shopsChanged = new Subject();  
+  startedEditing = new Subject<Shop>();
+
   constructor(private http: Http) { }
   
   getShops() {
     return this.http.get('http://localhost:3050/shops');    
   }
 
-  getShop(name: string) {
-    //return shops.find(shop => shop.name === name);
+  getShop(id: string) {
+    return this.http.get('http://localhost:3050/'+id+'/shop');  
   }
 
   newShop(shop: Shop) {
     return this.http.post('http://localhost:3050/shops/new', shop);
+  }
+
+  editShop(shop: Shop) { 
+    return this.http.put('http://localhost:3050/shops/' + shop._id + '/edit', shop);      
   }
 
   deleteShop(id: string) {

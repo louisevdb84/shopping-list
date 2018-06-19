@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ShopsService } from '../../services/shops.service';
 import { Shop } from '../../../Models/shop.model';
 import { NgForm } from '@angular/forms';
@@ -9,49 +9,52 @@ import { Subscription } from 'rxjs';
   templateUrl: './addedit-shops.component.html',
   styleUrls: ['./addedit-shops.component.css']
 })
-export class AddeditShopsComponent implements OnInit, OnDestroy {
-  @ViewChild('shopForm') shopForm: NgForm;
-  private subscription: Subscription;
+export class AddeditShopsComponent implements OnInit {
+  @ViewChild('shopForm') shopForm: NgForm;  
+  subscription: Subscription;
+  editMode = false;
+  editId: string;
+  editedShop: Shop;  
   shops : Shop[];
   
   constructor(private shopsService: ShopsService) { }
 
-  ngOnInit() {
-    this.getShops();
-    this.subscription = this.shopsService.shopsChanged
+  ngOnInit() {    
+    this.subscription = this.shopsService.startedEditing
       .subscribe(
-      (shops: Shop[]) => {
-        this.shops = shops;
-        }
-      );
-  }
+      (shop: Shop) => {        
+        this.editId = shop._id;
+        this.editMode = true;
+        this.shopsService.getShop(shop._id)
+          .subscribe(
+          (res) => {            
+            this.editedShop = res.json()
+            this.shopForm.setValue({
+              shopName: this.editedShop.name
+            })
+          }
+        )
+      }
+    )    
+  }  
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  getShops() {
-    this.shopsService.getShops()
+  onSubmit() {        
+    if (this.editMode) {  
+      this.editedShop.name = this.shopForm.value.shopName;      
+      this.shopsService.editShop(this.editedShop)
       .subscribe(
-      (res) => {this.shopsService.shopsChanged.next(res.json())},
-      (err) => console.log(err));
-  }
-
-  onAddItem() {
-    let newShop: Shop = new Shop(null, this.shopForm.value.shopName);
+        (res) => this.shopsService.shopsChanged.next(),
+        (err) => console.log(err));    
+    }
+    else {
+      let newShop: Shop = new Shop(null, this.shopForm.value.shopName);
+       this.shopsService.newShop(newShop)
+      .subscribe(
+        (res) => this.shopsService.shopsChanged.next(),
+        (err) => console.log(err));    
+    }
+    this.editMode = false;
     this.shopForm.resetForm();
-    this.shopsService.newShop(newShop)
-      .subscribe(
-        (res) => this.getShops(),
-        (err) => console.log(err));    
+   
   }
-
-  onDelete(shop) {    
-    this.shopsService.deleteShop(shop._id)
-      .subscribe(
-        (res) => this.getShops(),
-        (err) => console.log(err));    
-  }
-
-
 }

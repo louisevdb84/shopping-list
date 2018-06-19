@@ -6,14 +6,18 @@ import { ItemsService } from '../../Services/items.service';
 import { Item } from '../../../Models/item.model';
 import { Status } from '../../../Models/status.model';
 import { StatusService } from '../../services/status.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-addedit-items',
   templateUrl: './addedit-items.component.html',
   styleUrls: ['./addedit-items.component.css']
 })
-export class AddeditItemsComponent implements OnInit {
+export class AddeditItemsComponent implements OnInit, OnDestroy {
   @ViewChild('f') itemForm: NgForm;
+  subscription: Subscription;
+  editMode = false;
+  editedItem: Item;
   
   shops: Shop[];
   status: Status[];
@@ -26,6 +30,24 @@ export class AddeditItemsComponent implements OnInit {
   ngOnInit() {
     this.getShops();
     this.getStatus();
+    this.subscription = this.itemsService.startedEditing
+      .subscribe(
+      (item: Item) => {
+        this.editMode = true;
+        this.editedItem = item;
+        console.log(this.editedItem);
+        console.log(this.itemForm)
+      }
+    )
+    this.itemForm.setValue({
+      name: "A NAME",
+      // shops: this.shops[0].name,
+      // isRepeating: "True"
+    })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   getShops() {
@@ -42,29 +64,16 @@ export class AddeditItemsComponent implements OnInit {
       (err) => console.log(err));
   }
 
-  onAddItem() {    
+  onSubmit() {    
     const { name, shops, sorting, isRepeating } = this.itemForm.value;            
     let item: Item = new Item(
       null, name, shops, sorting, isRepeating,
         this.status.find(status => status.name === "Permanent")
-    );    
-
-    this.itemForm.resetForm();
-
+    );        
     this.itemsService.newItem(item)
       .subscribe(
         (res) => this.itemsService.itemsChanged.next(),
         (err) => console.log(err)
     )    
-  }
-
-
-  // onDelete(shop) {    
-  //   this.shopsService.deleteShop(shop._id)
-  //     .subscribe(
-  //       (res) => this.getShops(),
-  //       (err) => console.log(err));    
-  // }
-
-
-}
+    this.itemForm.resetForm();
+  }}
