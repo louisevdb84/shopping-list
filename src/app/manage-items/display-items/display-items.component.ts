@@ -18,9 +18,7 @@ export class DisplayItemsComponent implements OnInit, OnDestroy {
     this.getItems();
     this.subscription = this.itemsService.itemsChanged
     .subscribe(
-    () => {
-      this.getItems();
-      }
+    () => {this.getItems();}
     );
   }
   
@@ -33,12 +31,12 @@ export class DisplayItemsComponent implements OnInit, OnDestroy {
       this.itemsService.getItemsByStatus('items', 'Permanent')
         .subscribe(
         (res) => {
-          this.items = res.json();
+          this.items = res.json();          
         },        
         (err) => console.log(err));    
   }
 
-  onEdit(item: Item) {
+  onEdit(item: Item) {            
     this.itemsService.startedEditing.next(item);
   }
 

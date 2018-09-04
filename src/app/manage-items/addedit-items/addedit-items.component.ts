@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ShopsService } from '../../services/shops.service';
 import { Shop } from '../../../Models/shop.model';
-import { NgForm } from '@angular/forms';
+import { NgForm} from '@angular/forms';
 import { ItemsService } from '../../Services/items.service';
 import { Item } from '../../../Models/item.model';
 import { Status } from '../../../Models/status.model';
@@ -14,7 +14,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./addedit-items.component.css']
 })
 export class AddeditItemsComponent implements OnInit, OnDestroy {
-  @ViewChild('f') itemForm: NgForm;
+  @ViewChild('itemForm') itemForm: NgForm;  
+  
   subscription: Subscription;
   editMode = false;
   editedItem: Item;
@@ -30,20 +31,29 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getShops();
     this.getStatus();
-    this.subscription = this.itemsService.startedEditing
-      .subscribe(
-      (item: Item) => {
-        this.editMode = true;
-        this.editedItem = item;
-        console.log(this.editedItem);
-        console.log(this.itemForm)
-      }
-    )
-    this.itemForm.setValue({
-      name: "A NAME",
+
+    this.itemForm.form.patchValue({
+      itemName: "stuff",
       // shops: this.shops[0].name,
       // isRepeating: "True"
     })
+
+    this.subscription = this.itemsService.startedEditing
+      .subscribe(
+      (item: Item) => {            
+        this.editMode = true;
+        this.editedItem = item;  
+        this.editedItem.shop = this.shops.find(s => s.name === this.editedItem.shop.name);        
+        this.itemForm.setValue({
+          itemName: this.editedItem.name,
+          shops: this.editedItem.shop,
+          sorting: this.editedItem.sorting,
+          isRepeating: this.editedItem.isRepeating,
+          isCurrent: false
+        })        
+      }
+    )    
+   
   }
 
   ngOnDestroy() {
@@ -53,7 +63,7 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
   getShops() {
     this.shopsService.getShops()
       .subscribe(
-      (res) => {this.shops = res.json()},
+      (res) => { this.shops = res.json();},
       (err) => console.log(err));
   }
 
@@ -64,16 +74,45 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
       (err) => console.log(err));
   }
 
-  onSubmit() {    
-    const { name, shops, sorting, isRepeating } = this.itemForm.value;            
-    let item: Item = new Item(
-      null, name, shops, sorting, isRepeating,
-        this.status.find(status => status.name === "Permanent")
-    );        
-    this.itemsService.newItem(item)
-      .subscribe(
-        (res) => this.itemsService.itemsChanged.next(),
-        (err) => console.log(err)
-    )    
+  onSubmit() {        
+    const { itemName, shops, sorting, isRepeating, isCurrent } = this.itemForm.value;               
+    if (this.editMode) {
+      this.editedItem.name = itemName;
+      this.editedItem.shop = shops;
+      this.editedItem.isRepeating = isRepeating;
+      this.editedItem.sorting = sorting;
+      this.itemsService.editItem(this.editedItem)
+        .subscribe(
+        ()=> this.itemsService.itemsChanged.next()
+      )
+      this.editMode = false;
+    }
+    else {
+      if (isRepeating === "true") {      
+        let item: Item = new Item(
+          null, itemName, shops, sorting, isRepeating,
+            this.status.find(status => status.name === "Permanent")
+        );              
+        this.itemsService.newItem(item)
+          .subscribe(
+            (res) => this.itemsService.itemsChanged.next(),
+            (err) => console.log(err)
+        )      
+      }
+      
+      if (isCurrent || isRepeating === "false") {
+        let item: Item = new Item(
+          null, itemName, shops, sorting, isRepeating,
+            this.status.find(status => status.name === "Current")
+        );        
+        this.itemsService.newItem(item)
+          .subscribe(
+            (res) => this.itemsService.itemsChanged.next(),
+            (err) => console.log(err)
+        )    
+      }
+    }
+   
+    this.itemsService.doneEditingAdding.next();
     this.itemForm.resetForm();
   }}

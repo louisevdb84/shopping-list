@@ -9,6 +9,7 @@ import { Item } from '../../../Models/item.model';
 })
 export class CurrentComponent implements OnInit {
   items: Item[];
+  display = false;
 
   constructor(private itemsService: ItemsService) { }
 
@@ -27,6 +28,15 @@ export class CurrentComponent implements OnInit {
           this.items = res.json();                    
       },        
       (err) => console.log(err));    
+  }
+  onRemove(item: Item) {
+    this.itemsService.removeItem(item._id)
+      .subscribe(
+        (res) => this.itemsService.itemsChanged.next()
+  )
+  }
+  displayAdd() {
+    this.display = !this.display;
   }
 
 }

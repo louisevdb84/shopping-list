@@ -32,7 +32,7 @@ export class RepeatingComponent implements OnInit {
           this.items = res.json();            
         }
         else if (status === "Permanent"){
-          this.itemsCopied = res.json();  
+          this.itemsCopied = res.json().filter((item: Item)=> item.isRepeating);  
         }
         
       },        

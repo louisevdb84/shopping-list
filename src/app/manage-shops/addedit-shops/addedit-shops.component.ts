@@ -28,7 +28,7 @@ export class AddeditShopsComponent implements OnInit {
         this.shopsService.getShop(shop._id)
           .subscribe(
           (res) => {            
-            this.editedShop = res.json()
+            this.editedShop = res.json();            
             this.shopForm.setValue({
               shopName: this.editedShop.name
             })

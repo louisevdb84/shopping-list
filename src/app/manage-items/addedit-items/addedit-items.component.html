@@ -1,59 +1,65 @@
-<div class="row">
-  
-    <div class="col-xs-12">
-      <h3>Add Item</h3>      
-      <form (ngSubmit)="onSubmit(f)" #f="ngForm">      
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input 
-            type="text" 
-            id="name" 
-            class="form-control"
-            ngModel
-            name = "name"
-            required
-            >
-        </div>
+ <div class="row">
 
-        <div class="form-group">
-            <label for="shops">Shops</label>
-            <select   
-                id="shops" 
-                class="form-control"
-                ngModel = "Shop"
-                name="shops">
-                  <option *ngFor = "let shop of shops" [ngValue]="shop">{{shop.name}}</option>                
-            </select>          
-          </div>          
-
-        <div class="form-group">
-          <label for="amount">Sorting</label>
-          <input 
-            type="number" 
-            id="sorting" 
-            name="sorting"
-            class="form-control"
-            ngModel
-            >
-        </div>        
-        <div class="form-group">
-            <label for="isRepeating">Is Repeating</label>
-            <select   
-                id="isRepeating" 
-                class="form-control"
-                name= "isRepeating"
-                ngModel
-                >
-                  <option value="true">true</option>
-                  <option value="false">false</option>
-            </select>          
-          </div>          
-
-        <div class="row">
-          <div class="col-xs-12">
-            <button class="btn btn-success" type="submit">Add</button>                        
+      <div class="col-xs-12">
+        <h3>{{editMode? "Edit item" : "Add new item"}}</h3>
+        <form (ngSubmit)="onSubmit()" #itemForm="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="itemName" id="itemName" class="form-control" ngModel required>
           </div>
-        </div>
-      </form>
-    </div>   
-  </div>
+
+      <div class="form-group">
+          <label for="shops">Shops</label>
+          <select   
+              id="shops" 
+              class="form-control"
+              [ngModel] = "Shop"
+              name="shops">
+                <option *ngFor = "let shop of shops" [ngValue]="shop">{{shop.name}}</option>                
+          </select>          
+        </div>          
+  
+        <div class="form-group">
+            <label for="amount">Sorting</label>
+            <input 
+              type="number" 
+              id="sorting" 
+              name="sorting"
+              class="form-control"
+              ngModel
+              >
+          </div>     
+          <div class="form-group">
+              <label for="isRepeating">Is Repeating</label>
+              <select   
+                  id="isRepeating" 
+                  class="form-control"
+                  name= "isRepeating"
+                  ngModel
+                  >
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+              </select>          
+            </div>      
+            
+          <div class="form-group">
+              <label for="isCurrent">Add to shopping list?</label>
+              <input   
+                  type="checkbox"
+                  id="isCurrent" 
+                  class="form-control"
+                  name= "isCurrent"
+                  ngModel
+                  />                   
+            </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <button class="btn btn-success" type="submit">{{editMode? "Edit" : "Add"}}</button>
+              <br>
+              <br>
+            </div>
+          </div>
+        </form>   
+      </div>
+    </div>
