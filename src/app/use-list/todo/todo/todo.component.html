@@ -5,12 +5,37 @@
       class="form-control"
       (change)="onShopSelect($event)"
       #shopInput>
-        <option *ngFor = "let shop of shops" value={{shop.name}}>{{shop.name}}</option>                
+        <option value="all">All Shops</option>                        
+        <option *ngFor = "let shop of shops" value={{shop.name}}>{{shop.name}}</option>                        
   </select>          
 </div>          
-<label *ngFor = "let item of items" class="container">{{item.name}}
-    <input 
+<div *ngFor = "let item of items" class="container">
+  <div class="col-sm-3">
+      <input
+        value = {{item.sorting}}
+        type="number"
+        id = "sorting"
+        class="form-control"
+        (change) = "onSortingChange($event, item)"
+        #sorting
+      />
+  </div>
+  <div class="col-sm-1">
+      {{item.name}}
+  </div>
+  <div class="col-sm-1">
+      <input 
     type="checkbox"    
     (click) = "onDone(item)">
     <span class="checkmark"></span>
-  </label>
+  </div>
+  <div class="col-sm-1">  
+    <button class="btn btn-primary" (click)="onEdit(item)">Edit</button>
+  </div>
+    
+</div>
+<button *ngIf="displayEdit" class="btn btn-primary"(click) = onHide()>Hide</button>
+<div [ngStyle]="{visibility: isVisible}">    
+    <app-addedit-items></app-addedit-items>    
+</div>
+
