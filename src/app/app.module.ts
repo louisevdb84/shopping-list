@@ -21,6 +21,8 @@ import { StatusService } from './services/status.service';
 import { ManageShopsComponent } from './manage-shops/manage-shops/manage-shops.component';
 import { AddeditShopsComponent } from './manage-shops/addedit-shops/addedit-shops.component';
 import { DisplayShopsComponent } from './manage-shops/display-shops/display-shops.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { DisplayShopsComponent } from './manage-shops/display-shops/display-shop
     AddeditItemsComponent,
     ManageShopsComponent,
     AddeditShopsComponent,
-    DisplayShopsComponent
+    DisplayShopsComponent,
+    RegisterComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,

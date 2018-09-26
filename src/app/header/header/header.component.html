@@ -2,11 +2,20 @@
     <div class="container-fluid">
         <div class="navbar-default">
             <ul class="nav navbar-nav">
-                <li routerLinkActive="active"><a routerLink = "/uselist">Shopping</a></li>
-                <li routerLinkActive="active"><a routerLink = "/createlist">Create</a></li>
-                <li routerLinkActive="active"><a routerLink = "/items/display">Items</a></li>                
-                <li routerLinkActive="active"><a routerLink = "/shops">Shops</a></li>                
+                <li routerLinkActive="active"><a routerLink = "/uselist">Shopping list</a></li>
+                <li routerLinkActive="active"><a routerLink = "/createlist">Create shopping list</a></li>
+
+                <li routerLinkActive="active" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Manage
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                            
+                        <li routerLinkActive="active"><a routerLink = "/items/display">Items</a></li>                
+                        <li routerLinkActive="active"><a routerLink = "/shops">Shops</a></li>                
+                    </div>
+                  </li>
+                
             </ul>            
-        </div>
+        </div>      
     </div>
 </nav>
