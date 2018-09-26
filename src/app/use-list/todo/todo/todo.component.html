@@ -10,7 +10,7 @@
   </select>          
 </div>          
 <div *ngFor = "let item of items" class="container">
-  <div class="col-sm-3">
+  <div class="col-sm-2">
       <input
         value = {{item.sorting}}
         type="number"
@@ -20,7 +20,7 @@
         #sorting
       />
   </div>
-  <div class="col-sm-1">
+  <div class="col-sm-2">
       {{item.name}}
   </div>
   <div class="col-sm-1">

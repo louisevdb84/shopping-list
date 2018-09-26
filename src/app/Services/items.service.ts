@@ -11,7 +11,9 @@ export class ItemsService {
   doneEditingAdding = new Subject();
   
   constructor(private http: Http) { }
-  url: string = 'http://localhost:3050/';  
+  //url: string = 'https://frozen-journey-92176.herokuapp.com/'; 
+  url: string = 'http://localhost:3050/'; 
+  
 
   get(path) {
     return this.http.get(this.url + path);      
@@ -22,23 +24,23 @@ export class ItemsService {
   }
   
   newItem(item: Item) {
-    return this.http.post('http://localhost:3050/items/new', item);
+    return this.http.post(this.url + 'items/new', item);
   }
 
   newItems(items: Item[]) {        
-    return this.http.post('http://localhost:3050/items/copy', items);
+    return this.http.post(this.url + 'items/copy', items);
   }
 
   editItem(item: Item) { 
-    return this.http.put('http://localhost:3050/items/' + item._id + '/edit', item);      
+    return this.http.put(this.url +  'items/' + item._id + '/edit', item);      
   }
 
   removeItem(id: string) {
-    return this.http.delete('http://localhost:3050/items/delete', {body: {id: id}});
+    return this.http.delete(this.url + 'items/delete', {body: {id: id}});
   }
 
   removeAllByStatus(status: string){
-    return this.http.delete('http://localhost:3050/items/deleteAll', {body: {status: status}});
+    return this.http.delete(this.url + 'items/deleteAll', {body: {status: status}});
   }
 }
 
@@ -54,11 +56,11 @@ export class ItemsService {
 //   }
 
 //   newShop(shop: Shop) {
-//     return this.http.post('http://localhost:3050/shops/new', shop);
+//     return this.http.post('this.url + /shops/new', shop);
 //   }
 
 //   deleteShop(id: string) {
-//     return this.http.delete('http://localhost:3050/shops/delete', {body: {id: id}});
+//     return this.http.delete(this.url + 'shops/delete', {body: {id: id}});
 //   }
 // }
 

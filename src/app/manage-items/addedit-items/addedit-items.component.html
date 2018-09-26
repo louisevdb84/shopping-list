@@ -13,7 +13,7 @@
           <select   
               id="shops" 
               class="form-control"
-              [ngModel] = "Shop"
+              ngModel
               name="shops">
                 <option *ngFor = "let shop of shops" [ngValue]="shop">{{shop.name}}</option>                
           </select>          

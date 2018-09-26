@@ -6,7 +6,9 @@ export class StatusService {
   constructor(private http: Http) { }
   
   getStatusList() {
+    //return this.http.get('https://frozen-journey-92176.herokuapp.com/status');    
     return this.http.get('http://localhost:3050/status');    
+    
   }
 
 //   getShop(name: string) {

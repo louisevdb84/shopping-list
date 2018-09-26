@@ -10,25 +10,27 @@ export class ShopsService {
   startedEditing = new Subject<Shop>();
 
   constructor(private http: Http) { }
+  //url: string = 'https://frozen-journey-92176.herokuapp.com/';  
+  url: string = 'http://localhost:3050/'; 
   
   getShops() {
-    return this.http.get('http://localhost:3050/shops');    
+    return this.http.get(this.url + 'shops');    
   }
 
   getShop(id: string) {
-    return this.http.get('http://localhost:3050/'+id+'/shop');  
+    return this.http.get(this.url + +id+'/shop');  
   }
 
   newShop(shop: Shop) {
-    return this.http.post('http://localhost:3050/shops/new', shop);
+    return this.http.post(this.url + 'shops/new', shop);
   }
 
   editShop(shop: Shop) { 
-    return this.http.put('http://localhost:3050/shops/' + shop._id + '/edit', shop);      
+    return this.http.put(this.url + 'shops/' + shop._id + '/edit', shop);      
   }
 
   deleteShop(id: string) {
-    return this.http.delete('http://localhost:3050/shops/delete', {body: {id: id}});
+    return this.http.delete(this.url + 'shops/delete', {body: {id: id}});
   }
 }
 
