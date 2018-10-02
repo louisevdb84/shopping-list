@@ -18,6 +18,7 @@ import { DisplayItemsComponent } from './manage-items/display-items/display-item
 import { AddeditItemsComponent } from './manage-items/addedit-items/addedit-items.component';
 import { ShopsService } from './services/shops.service';
 import { StatusService } from './services/status.service';
+import { AuthService } from './services/auth.service';
 import { ManageShopsComponent } from './manage-shops/manage-shops/manage-shops.component';
 import { AddeditShopsComponent } from './manage-shops/addedit-shops/addedit-shops.component';
 import { DisplayShopsComponent } from './manage-shops/display-shops/display-shops.component';
@@ -50,7 +51,7 @@ import { SigninComponent } from './auth/signin/signin.component';
     FormsModule,
     HttpModule
   ],
-  providers: [ItemsService, ShopsService, StatusService],
+  providers: [ItemsService, ShopsService, StatusService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

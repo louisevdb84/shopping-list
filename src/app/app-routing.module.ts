@@ -9,6 +9,8 @@ import { AddeditItemsComponent } from './manage-items/addedit-items/addedit-item
 import { ManageShopsComponent } from './manage-shops/manage-shops/manage-shops.component';
 import { DisplayShopsComponent } from './manage-shops/display-shops/display-shops.component';
 import { AddeditShopsComponent } from './manage-shops/addedit-shops/addedit-shops.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/uselist', pathMatch: 'full' },
@@ -26,9 +28,11 @@ const appRoutes: Routes = [
       { path: 'display', component: DisplayShopsComponent },
       { path: 'new', component: AddeditShopsComponent },
       { path: ':id/edit', component: AddeditShopsComponent}
-    ]
-  }
-
+    ]    
+  },
+  { path: 'register', component: RegisterComponent },
+  { path: 'signin', component: SigninComponent }
+  
 ];
 
 
