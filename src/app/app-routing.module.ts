@@ -31,7 +31,8 @@ const appRoutes: Routes = [
     ]    
   },
   { path: 'register', component: RegisterComponent },
-  { path: 'signin', component: SigninComponent }
+  { path: 'signin', component: SigninComponent },
+  { path: 'logout',component: SigninComponent }
   
 ];
 

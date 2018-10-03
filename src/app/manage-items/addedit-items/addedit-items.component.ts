@@ -63,7 +63,7 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
   getShops() {
     this.shopsService.getShops()
       .subscribe(
-      (res) => { this.shops = res.json();},
+      //(res) => { this.shops = res.json();},
       (err) => console.log(err));
   }
 

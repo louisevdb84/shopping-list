@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 declare var jquery:any;
 declare var $: any;
 
@@ -8,9 +9,20 @@ declare var $: any;
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {  
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+  }
+
+  show() {
+    if (localStorage.getItem('token')) {
+      return true;
+    }      
+    return false;    
+  }  
+
+  logout() {    
+    localStorage.removeItem('token');    
   }
 
 }

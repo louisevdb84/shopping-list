@@ -22,13 +22,15 @@ export class AddeditShopsComponent implements OnInit {
   ngOnInit() {    
     this.subscription = this.shopsService.startedEditing
       .subscribe(
-      (shop: Shop) => {        
+      (shop: Shop) => {          
         this.editId = shop._id;
         this.editMode = true;
+        console.log(shop._id)
         this.shopsService.getShop(shop._id)
           .subscribe(
-          (res) => {            
-            this.editedShop = res.json();            
+          (res) => {     
+            console.log(res);
+            this.editedShop = res;   
             this.shopForm.setValue({
               shopName: this.editedShop.name
             })
@@ -40,14 +42,17 @@ export class AddeditShopsComponent implements OnInit {
 
   onSubmit() {        
     if (this.editMode) {  
+      console.log(this.editedShop)
       this.editedShop.name = this.shopForm.value.shopName;      
+      
       this.shopsService.editShop(this.editedShop)
       .subscribe(
-        (res) => this.shopsService.shopsChanged.next(),
+        () => this.shopsService.shopsChanged.next(),
         (err) => console.log(err));    
     }
     else {
-      let newShop: Shop = new Shop(null, this.shopForm.value.shopName);
+      
+      let newShop: Shop = new Shop(null, this.shopForm.value.shopName, null);
        this.shopsService.newShop(newShop)
       .subscribe(
         (res) => this.shopsService.shopsChanged.next(),

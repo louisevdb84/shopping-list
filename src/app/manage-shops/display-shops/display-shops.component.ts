@@ -30,7 +30,7 @@ export class DisplayShopsComponent implements OnInit, OnDestroy {
   getShops() {
     this.shopsService.getShops()
       .subscribe(
-      (res) => this.shops = res.json(),
+      (res) => this.shops = res,      
       (err) => console.log(err));
   }
 

@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 import { AppComponent } from './app.component';
 import { CreateListComponent } from './create-list/create-list.component';
@@ -49,9 +51,14 @@ import { SigninComponent } from './auth/signin/signin.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
-  providers: [ItemsService, ShopsService, StatusService, AuthService],
+  providers: [{
+    provide : HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi   : true,
+  },ItemsService, ShopsService, StatusService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

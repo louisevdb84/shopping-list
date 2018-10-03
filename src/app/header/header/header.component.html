@@ -2,10 +2,10 @@
     <div class="container-fluid">
         <div class="navbar-default">
             <ul class="nav navbar-nav">
-                <li routerLinkActive="active"><a routerLink = "/uselist">Shopping list</a></li>
-                <li routerLinkActive="active"><a routerLink = "/createlist">Create shopping list</a></li>
+                <li  *ngIf = "show()" routerLinkActive="active"><a routerLink = "/uselist">Shopping list</a></li>
+                <li  *ngIf = "show()" routerLinkActive="active"><a routerLink = "/createlist">Create shopping list</a></li>
 
-                <li routerLinkActive="active" class="nav-item dropdown">
+                <li  *ngIf = "show()" routerLinkActive="active" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Manage
                     </a>
@@ -17,8 +17,9 @@
                 
             </ul>      
             <ul class="nav navbar-nav navbar-right">            
-                <li routerLinkActive="active"><a routerLink = "/register">Register</a></li>
-                <li routerLinkActive="active"><a routerLink = "/signin">Sign In</a></li>
+                <li *ngIf = "!show()" routerLinkActive="active"><a routerLink = "/register">Register</a></li>
+                <li *ngIf = "!show()" routerLinkActive="active"><a routerLink = "/signin">Sign In</a></li>
+                <li *ngIf = "show()" routerLinkActive="active"><a (click)=logout() routerLink = "/logout">Log out</a></li>
             </ul>
         </div>      
     </div>
