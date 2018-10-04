@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http} from "@angular/http";
+import { HttpClient} from "@angular/common/http";
 import { Item } from '../../models/item.model';
 import { Shop } from '../../models/shop.model';
 import { Subject } from "rxjs";
@@ -10,17 +10,17 @@ export class ItemsService {
   startedEditing = new Subject<Item>();
   doneEditingAdding = new Subject();
   
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
   //url: string = 'https://frozen-journey-92176.herokuapp.com/'; 
   url: string = 'http://localhost:3050/'; 
   
 
   get(path) {
-    return this.http.get(this.url + path);      
+    return this.http.get<Item[]>(this.url + path);      
   }
 
   getItemsByStatus(path, status) {       
-    return this.http.post(this.url + path, {status: status});      
+    return this.http.post<Item[]>(this.url + path, {status: status});      
   }
   
   newItem(item: Item) {
@@ -36,11 +36,11 @@ export class ItemsService {
   }
 
   removeItem(id: string) {
-    return this.http.delete(this.url + 'items/delete', {body: {id: id}});
+    return this.http.request('delete', this.url + 'items/delete', {body: {id: id}});
   }
 
   removeAllByStatus(status: string){
-    return this.http.delete(this.url + 'items/deleteAll', {body: {status: status}});
+    return this.http.request('delete', this.url + 'items/deleteAll', {body: {status: status}});
   }
 }
 

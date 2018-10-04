@@ -27,12 +27,12 @@ export class RepeatingComponent implements OnInit {
   getItems(status) {    
     this.itemsService.getItemsByStatus('items', status)
       .subscribe(
-      (res) => {
+      (res) => {        
         if (status === "Copy") {
-          this.items = res.json();            
+          this.items = res;
         }
         else if (status === "Permanent"){
-          this.itemsCopied = res.json().filter((item: Item)=> item.isRepeating);  
+          this.itemsCopied = res.filter((item: Item)=> item.isRepeating);  
         }
         
       },        
@@ -48,11 +48,12 @@ export class RepeatingComponent implements OnInit {
       (err) => console.log(err));    
   }
 
-  copyItems() {    
-    this.itemsCopied.forEach(item => {
+  copyItems() {        
+    
+    this.itemsCopied.forEach(item => {      
       item.status = this.status.find(s => s.name === "Copy");
       item._id = null;      
-    })    
+    })        
     this.itemsService.newItems(this.itemsCopied)
       .subscribe(
       (res) => this.getItems("Copy"),

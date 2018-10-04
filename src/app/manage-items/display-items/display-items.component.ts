@@ -31,7 +31,7 @@ export class DisplayItemsComponent implements OnInit, OnDestroy {
       this.itemsService.getItemsByStatus('items', 'Permanent')
         .subscribe(
         (res) => {
-          this.items = res.json();          
+          this.items = res;
         },        
         (err) => console.log(err));    
   }

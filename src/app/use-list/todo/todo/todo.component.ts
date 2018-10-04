@@ -73,10 +73,10 @@ export class TodoComponent implements OnInit, OnDestroy {
       (res) => {         
         if (!this.selectedShop)
         {
-          this.items = res.json();
+          this.items = res;
         }
         else {
-          this.items = res.json().filter(item => item.shop.name === this.selectedShop.name)  
+          this.items = res.filter(item => item.shop.name === this.selectedShop.name)  
         }
         
       },        

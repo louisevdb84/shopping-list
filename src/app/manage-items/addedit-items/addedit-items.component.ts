@@ -63,7 +63,7 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
   getShops() {
     this.shopsService.getShops()
       .subscribe(
-      //(res) => { this.shops = res.json();},
+      (res) => { this.shops = res;},
       (err) => console.log(err));
   }
 
@@ -74,9 +74,10 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
       (err) => console.log(err));
   }
 
-  onSubmit() {        
+  onSubmit() {            
     const { itemName, shops, sorting, isRepeating, isCurrent } = this.itemForm.value;               
     if (this.editMode) {
+      
       this.editedItem.name = itemName;
       this.editedItem.shop = shops;
       this.editedItem.isRepeating = isRepeating;
@@ -90,7 +91,7 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
     else {
       if (isRepeating === "true") {      
         let item: Item = new Item(
-          null, itemName, shops, sorting, isRepeating,
+          null, null, itemName, shops, sorting, isRepeating,
             this.status.find(status => status.name === "Permanent")
         );              
         this.itemsService.newItem(item)
@@ -102,7 +103,7 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
       
       if (isCurrent || isRepeating === "false") {
         let item: Item = new Item(
-          null, itemName, shops, sorting, isRepeating,
+          null, null,itemName, shops, sorting, isRepeating,
             this.status.find(status => status.name === "Current")
         );        
         this.itemsService.newItem(item)

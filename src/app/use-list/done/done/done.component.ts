@@ -39,7 +39,7 @@ export class DoneComponent implements OnInit, OnDestroy {
     this.itemsService.getItemsByStatus('items', status)
       .subscribe(
       (res) => {        
-          this.items = res.json();                    
+        this.items = res;
       },        
       (err) => console.log(err));    
   }
