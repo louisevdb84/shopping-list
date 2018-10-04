@@ -26,6 +26,7 @@ export class AuthService {
         });
         
     }
-
-    
+    isAuthenticated() {
+        return localStorage.getItem('token') != null;
+    }
 }

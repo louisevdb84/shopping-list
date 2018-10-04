@@ -36,7 +36,7 @@ export class TodoComponent implements OnInit, OnDestroy {
     this.shopsService.getShops()
     .subscribe(
       (res) => {
-        //this.shops = res.json()
+        this.shops = res;
         this.selectedShop = null;
       },
       (err) => console.log(err));

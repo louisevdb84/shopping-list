@@ -26,6 +26,7 @@ import { AddeditShopsComponent } from './manage-shops/addedit-shops/addedit-shop
 import { DisplayShopsComponent } from './manage-shops/display-shops/display-shops.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 
 @NgModule({
@@ -58,7 +59,7 @@ import { SigninComponent } from './auth/signin/signin.component';
     provide : HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi   : true,
-  },ItemsService, ShopsService, StatusService, AuthService],
+  },ItemsService, ShopsService, StatusService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

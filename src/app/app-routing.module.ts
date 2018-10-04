@@ -11,23 +11,24 @@ import { DisplayShopsComponent } from './manage-shops/display-shops/display-shop
 import { AddeditShopsComponent } from './manage-shops/addedit-shops/addedit-shops.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/uselist', pathMatch: 'full' },
-  { path: 'uselist', component: UseListComponent },
-  { path: 'createlist', component: CreateListComponent },
+  { path: 'uselist', component: UseListComponent, canActivate: [AuthGuard] },
+  { path: 'createlist', component: CreateListComponent, canActivate: [AuthGuard] },
   {
-    path: 'items', component: ManageItemsComponent, children: [
-      { path: 'display', component: DisplayItemsComponent },
-      { path: 'new', component: AddeditItemsComponent },
-      { path: ':id/edit', component: AddeditItemsComponent }
+    path: 'items', component: ManageItemsComponent, canActivate: [AuthGuard], children: [
+      { path: 'display', component: DisplayItemsComponent, canActivate: [AuthGuard] },
+      { path: 'new', component: AddeditItemsComponent, canActivate: [AuthGuard] },
+      { path: ':id/edit', component: AddeditItemsComponent, canActivate: [AuthGuard] }
     ]
   },
   {
-    path: 'shops', component: ManageShopsComponent, children: [
-      { path: 'display', component: DisplayShopsComponent },
-      { path: 'new', component: AddeditShopsComponent },
-      { path: ':id/edit', component: AddeditShopsComponent}
+    path: 'shops', component: ManageShopsComponent, canActivate: [AuthGuard], children: [
+      { path: 'display', component: DisplayShopsComponent, canActivate: [AuthGuard] },
+      { path: 'new', component: AddeditShopsComponent, canActivate: [AuthGuard] },
+      { path: ':id/edit', component: AddeditShopsComponent, canActivate: [AuthGuard]}
     ]    
   },
   { path: 'register', component: RegisterComponent },

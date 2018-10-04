@@ -25,8 +25,7 @@ export class ShopsService {
     return this.http.post(this.url + 'shops/new', shop);
   }
 
-  editShop(shop: Shop) {
-    console.log(shop)
+  editShop(shop: Shop) {    
     return this.http.put(this.url + 'shops/' + shop._id + '/edit', shop);      
   }
 
