@@ -51,16 +51,16 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
    
   }
 
-  ngAfterViewChecked() {          
-    if (this.itemForm.form.value.itemName === "" || this.itemForm.form.value.itemName === null) {
-      console.log("IN HRE")
-      this.itemForm.form.patchValue({      
-        shops: this.shops[0],
-        isRepeating: true
-      })  
-    }
+  // ngAfterViewChecked() {          
+  //   if (this.itemForm.form.value.itemName === "" || this.itemForm.form.value.itemName === null) {
+  //     console.log("IN HRE")
+  //     this.itemForm.form.patchValue({      
+  //       shops: this.shops[0],
+  //       isRepeating: true
+  //     })  
+  //   }
     
-  }
+  // }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
