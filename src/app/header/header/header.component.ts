@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 declare var jquery:any;
 declare var $: any;
 
@@ -9,7 +10,7 @@ declare var $: any;
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {  
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {    
   }
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit {
   }  
 
   logout() {    
-    localStorage.removeItem('token');    
+    localStorage.removeItem('token');   
+    this.router.navigate(['/signin']);
   }
 
 }

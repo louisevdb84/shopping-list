@@ -3,15 +3,18 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../../models/user.model';
 
+import { Router, ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
-  user: User;
+export class SigninComponent implements OnInit {  
+  user: User;  
 
-  constructor(private authService: AuthService) { }  
+  constructor(private authService: AuthService, private router: Router) {     
+  }  
 
   ngOnInit() {
     
@@ -22,7 +25,8 @@ export class SigninComponent implements OnInit {
     this.authService.signinUser(this.user)
       .subscribe(
       (res) => {
-        localStorage.setItem('token', res.json());         
+        localStorage.setItem('token', res.json());        
+        this.router.navigate(['/']);
       }
     )    
   }

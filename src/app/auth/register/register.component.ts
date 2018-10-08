@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,7 @@ import { User } from '../../../models/user.model';
 })
 export class RegisterComponent implements OnInit {
   user: User; 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {         
   }
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.user)
       .subscribe(
       (res) => {
-        localStorage.setItem('token', res.json());        
+        localStorage.setItem('token', res.json());   
+        this.router.navigate(['/']);
       }
     )
   }
