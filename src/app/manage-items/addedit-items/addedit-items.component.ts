@@ -30,13 +30,8 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getShops();
-    this.getStatus();
-
-    this.itemForm.form.patchValue({
-      itemName: "stuff",
-      // shops: this.shops[0].name,
-      // isRepeating: "True"
-    })
+    this.getStatus();   
+  
 
     this.subscription = this.itemsService.startedEditing
       .subscribe(
@@ -54,6 +49,17 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
       }
     )    
    
+  }
+
+  ngAfterViewChecked() {          
+    if (this.itemForm.form.value.itemName === "" || this.itemForm.form.value.itemName === null) {
+      console.log("IN HRE")
+      this.itemForm.form.patchValue({      
+        shops: this.shops[0],
+        isRepeating: true
+      })  
+    }
+    
   }
 
   ngOnDestroy() {
@@ -89,11 +95,14 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
       this.editMode = false;
     }
     else {
+      
       if (isRepeating === "true") {      
         let item: Item = new Item(
           null, null, itemName, shops, sorting, isRepeating,
             this.status.find(status => status.name === "Permanent")
         );              
+
+
         this.itemsService.newItem(item)
           .subscribe(
             (res) => this.itemsService.itemsChanged.next(),

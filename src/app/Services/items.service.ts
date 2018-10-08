@@ -11,8 +11,8 @@ export class ItemsService {
   doneEditingAdding = new Subject();
   
   constructor(private http: HttpClient) { }
-  //url: string = 'https://frozen-journey-92176.herokuapp.com/'; 
-  url: string = 'http://localhost:3050/'; 
+  url: string = 'https://frozen-journey-92176.herokuapp.com/'; 
+  //url: string = 'http://localhost:3050/'; 
   
 
   get(path) {

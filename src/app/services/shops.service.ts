@@ -10,8 +10,8 @@ export class ShopsService {
   startedEditing = new Subject<Shop>();
 
   constructor(private http: HttpClient) { }
-  //url: string = 'https://frozen-journey-92176.herokuapp.com/';  
-  url: string = 'http://localhost:3050/'; 
+  url: string = 'https://frozen-journey-92176.herokuapp.com/';  
+  //url: string = 'http://localhost:3050/'; 
   
   getShops() {        
     return this.http.get<Shop[]>(this.url + 'shops');    
@@ -30,8 +30,7 @@ export class ShopsService {
   }
 
   deleteShop(id: string) {
-    return this.http.request('delete',this.url + 'shops/delete', {body: {id: id}});
-    //return this.http.delete(this.url + 'shops/delete');
+    return this.http.request('delete',this.url + 'shops/delete', {body: {id: id}});    
   }
 }
 
