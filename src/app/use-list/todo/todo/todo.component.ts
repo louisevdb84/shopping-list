@@ -117,4 +117,31 @@ export class TodoComponent implements OnInit, OnDestroy {
     this.isVisible = "hidden";
     this.displayEdit = false;
   }
+
+  allowDrop(event, item) {
+    //console.log(item);
+    event.preventDefault();
+  }
+
+  drag(event,item) {    
+    //console.log(item);
+    event.dataTransfer.setData("item", JSON.stringify(item));
+  }
+
+  drop(event, item) {    
+    console.log(item);
+    //event.preventDefault();
+    var data = event.dataTransfer.getData("item");
+    console.log(JSON.parse(data));
+    //console.log(event.target)
+
+    // item.sorting = 100;
+    // this.itemsService.editItem(item)
+    //    .subscribe((res => {
+    //      this.getItems("Current")
+    //      this.itemsService.itemsChanged.next();
+    //    }));      
+    
+    //event.target.appendChild(document.getElementById(data));
+  }
 }

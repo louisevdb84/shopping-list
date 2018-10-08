@@ -1,0 +1,13 @@
+@media (max-width: 600px) {
+    div {
+        font-size: 12px;
+    }
+    #items {
+        width: 35px;
+        padding: 1px;
+        font-size: 10px
+    }
+    .btn{
+        font-size: 10px
+    }
+}
