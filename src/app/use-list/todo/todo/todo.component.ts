@@ -24,7 +24,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   status: Status[];
   selectedShop: Shop;
   displayEdit = false;
-  isVisible = "hidden";
+  isVisible = "collapse";
 
   constructor(
     private itemsService: ItemsService,
@@ -54,7 +54,7 @@ export class TodoComponent implements OnInit, OnDestroy {
       this.subscription2 = this.itemsService.doneEditingAdding
       .subscribe(
         () => {
-          this.isVisible = "hidden";
+          this.isVisible = "collapse";
           this.displayEdit = false;
         }
       );
@@ -114,7 +114,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   }
 
   onHide() {
-    this.isVisible = "hidden";
+    this.isVisible = "collapse";
     this.displayEdit = false;
   }
 

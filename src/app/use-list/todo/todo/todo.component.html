@@ -10,13 +10,17 @@
   </select>          
 </div>          
 <div *ngFor = "let item of items" class="container">
+
   <div
       (drop)="drop($event, item)" 
       (dragover)="allowDrop($event, item)"
       draggable="true" 
       (dragstart)="drag($event, item)" 
       id = {{item._id}}>
-  <div class="col-xs-1">
+  
+
+        
+  <div class="col-md-2 col-xs-2">
       <input
         value = {{item.sorting}}
         type="number"
@@ -26,22 +30,24 @@
         #sorting
       />
   </div>
-  <div class="col-xs-2">
-      {{item.name}}
-  </div>
-  <div class="col-xs-2">
+  <div class="col-md-1 col-xs-1">
       <input 
     type="checkbox"    
     (click) = "onDone(item)">
     <span class="checkmark"></span>
   </div>
-  <div class="col-xs-1">  
-    <button class="btn btn-primary" (click)="onEdit(item)">Edit</button>
+  
+  <div class="col-md-7 col-xs-7">
+      {{item.name}}
   </div>
+  <div class="col-md-1 col-xs-1">  
+      <button class="btn btn-primary" (click)="onEdit(item)">Edit</button>
+    </div>
     
 </div>
-<button *ngIf="displayEdit" class="btn btn-primary"(click) = onHide()>Hide</button>
+
 </div>
+<button *ngIf="displayEdit" class="btn btn-primary"(click) = onHide()>Hide</button>
 <div [ngStyle]="{visibility: isVisible}">    
     <app-addedit-items></app-addedit-items>    
 </div>
