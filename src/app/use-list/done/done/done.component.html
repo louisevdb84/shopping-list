@@ -1,8 +1,20 @@
 <h3>Done</h3>
-<label id="items" *ngFor = "let item of items" class="container">{{item.name}}   
-  <button class="btn btn-info" (click)="undo(item)">Undo</button>
-  </label>
 
-<button class="btn btn-primary" (click)="removeAll()">
-  Remove All
-</button>
+  <div  *ngFor = "let item of items" >
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+      <label id="items" class="container">{{item.name}}</label>
+    </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+          <button class="btn btn-info" (click)="undo(item)">Undo</button>
+        </div>      
+        
+  </div>
+</div>
+<br>
+  <div>
+    <button class="btn btn-primary" (click)="removeAll()">
+        Remove All
+      </button>
+</div>
+
