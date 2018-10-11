@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class AddeditItemsComponent implements OnInit, OnDestroy {
   @ViewChild('itemForm') itemForm: NgForm;  
+  @ViewChild('name') name: ElementRef;
   
   subscription: Subscription;
   editMode = false;
@@ -51,16 +52,18 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
    
   }
 
-  // ngAfterViewChecked() {          
-  //   if (this.itemForm.form.value.itemName === "" || this.itemForm.form.value.itemName === null) {
-  //     console.log("IN HRE")
-  //     this.itemForm.form.patchValue({      
-  //       shops: this.shops[0],
-  //       isRepeating: true
-  //     })  
-  //   }
+  ngDoCheck() {          
+    if (this.itemForm.form.value.itemName === "" || this.itemForm.form.value.itemName === null) {      
+      this.itemForm.form.patchValue({      
+        shops: this.shops[0],
+        isRepeating: true
+      })  
+       this.name.nativeElement.focus();
+      
+    }
     
-  // }
+    
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -95,8 +98,8 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
       this.editMode = false;
     }
     else {
-      
-      if (isRepeating === "true") {      
+      console.log(this.itemForm.value)
+      if (isRepeating === "true" || isRepeating) {           
         let item: Item = new Item(
           null, null, itemName, shops, sorting, isRepeating,
             this.status.find(status => status.name === "Permanent")
@@ -121,8 +124,8 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
             (err) => console.log(err)
         )    
       }
-    }
-   
+    }    
     this.itemsService.doneEditingAdding.next();
     this.itemForm.resetForm();
+    
   }}

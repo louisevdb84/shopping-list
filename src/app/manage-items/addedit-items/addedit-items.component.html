@@ -5,8 +5,20 @@
         <form (ngSubmit)="onSubmit()" #itemForm="ngForm">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" name="itemName" id="itemName" class="form-control" ngModel required>
+            <input  #name type="text" name="itemName" id="itemName" class="form-control" ngModel required>
           </div>
+
+            
+        <div class="form-group">
+            <label for="amount">Sorting</label>
+            <input 
+              type="number" 
+              id="sorting" 
+              name="sorting"
+              class="form-control"
+              ngModel
+              >
+          </div>   
 
       <div class="form-group">
           <label for="shops">Shops</label>
@@ -19,16 +31,6 @@
           </select>          
         </div>          
   
-        <div class="form-group">
-            <label for="amount">Sorting</label>
-            <input 
-              type="number" 
-              id="sorting" 
-              name="sorting"
-              class="form-control"
-              ngModel
-              >
-          </div>     
           <div class="form-group">
               <label for="isRepeating">Is Repeating</label>
               <select   

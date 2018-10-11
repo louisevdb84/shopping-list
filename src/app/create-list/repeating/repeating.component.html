@@ -2,14 +2,14 @@
 <button class="btn" (click)=copyItems()>Make a copy</button>
 
 <div *ngFor = "let item of items" class="container">
-  <div class="row">
-    <div class="col-md-4">
+  <div class="row addBorder">
+    <div class="col-md-4 col-sm-4 col-xs-4">
         {{item.name}}
     </div>
-    <div class="col-md-1">
+    <div class="col-md-1 col-sm-1 col-xs-1">
         <button class="btn btn-primary" (click) = "onAdd(item)">Add</button>
     </div>
-    <div class="col-md-1">
+    <div class="col-md-1 col-sm-1 col-xs-1">
         <button class="btn btn-danger" (click) = "onRemove(item._id)">Remove</button>
     </div>
   </div>
