@@ -1,26 +1,78 @@
-<nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-expand-lg bg-white fixed-top">
     <div class="container-fluid">
         <div class="navbar-default">
             <ul class="nav navbar-nav">
                 <li  *ngIf = "show()" routerLinkActive="active"><a routerLink = "/uselist">Shopping list</a></li>
                 <li  *ngIf = "show()" routerLinkActive="active"><a routerLink = "/createlist">Create shopping list</a></li>
-
-                <li  *ngIf = "show()" routerLinkActive="active" class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Manage
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                            
+                <a ngbDropdown  *ngIf = "show()" routerLinkActive="active" class="nav-item dropdown">
+                    <div class="nav-link dropdown-toggle" ngbDropdownToggle>
+                      <i class="now-ui-icons files_paper" aria-hidden="true"></i>
+                      <p>Manage</p>
+                    </div>
+                    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
                         <li routerLinkActive="active"><a routerLink = "/items/display">Items</a></li>                
                         <li routerLinkActive="active"><a routerLink = "/shops">Shops</a></li>                
                     </div>
-                  </li>               
-                
+                </a>
             </ul>      
-            <ul class="nav navbar-nav navbar-right">            
+            <ul class="navbar-nav ml-auto">            
                 <li *ngIf = "!show()" routerLinkActive="active"><a routerLink = "/register">Register</a></li>
                 <li *ngIf = "!show()" routerLinkActive="active"><a routerLink = "/signin">Sign In</a></li>
                 <li *ngIf = "show()" routerLinkActive="active"><a (click)=logout() routerLink = "/logout">Log out</a></li>
             </ul>
         </div>      
+    </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-lg bg-white fixed-top navbar-primary" color-on-scroll="500">
+    <div class="container">
+        <div class="navbar-translate">
+            <a *ngIf = "show()" class="navbar-brand" [routerLink]="['/uselist']" placement="bottom">
+                Shopping List
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" data-nav-image="./blurred-image-1.jpg">
+            <ul class="navbar-nav ml-auto">
+                <li *ngIf = "show()" class="nav-item">
+                    <a class="nav-link" [routerLink]="['/createlist']">
+                      <i class="now-ui-icons design_app"></i>
+                      <p>Create Shopping List</p>
+                    </a>
+                </li>              
+                <a *ngIf = "show()" ngbDropdown class="nav-item dropdown">
+                    <div class="nav-link dropdown-toggle" ngbDropdownToggle>
+                      <i class="now-ui-icons design_image" aria-hidden="true"></i>
+                      <p>Manage</p>
+                    </div>
+                    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" [routerLink]="['/items/display']"><i class="now-ui-icons business_bulb-63"></i> Items</a>
+                        <a class="dropdown-item" [routerLink]="['/shops']"><i class="now-ui-icons text_align-left"></i> Shops</a>                        
+                       
+                    </div>
+                </a>
+                <li *ngIf = "show()" class="nav-item">
+                    <a (click)=logout() class="nav-link btn btn-primary" href="#">
+                       <p>Logout</p>
+                    </a>
+                </li>
+                <li *ngIf = "!show()" class="nav-item">
+                    <a class="nav-link" [routerLink]="['/register']">
+                      <i class="now-ui-icons design_app"></i>
+                      <p>Register</p>
+                    </a>
+                </li>              
+                <li *ngIf = "!show()" class="nav-item">
+                    <a class="nav-link" [routerLink]="['/signin']">
+                      <i class="now-ui-icons design_app"></i>
+                      <p>Sign In</p>
+                    </a>
+                </li>              
+            </ul>
+        </div>
     </div>
 </nav>
