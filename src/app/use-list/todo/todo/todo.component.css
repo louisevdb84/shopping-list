@@ -22,3 +22,21 @@ input[type="checkbox"]{
         font-size: 12px
     }
 }
+
+@media (max-width: 500px) {
+    div {
+        font-size: 10px;
+    }
+    #sorting {
+        width: 35px;
+        padding: 1px;
+        font-size: 10px
+    }
+    .btn{
+        font-size: 10px
+    }
+    td{
+        padding: 5px; 
+          
+    }
+}
