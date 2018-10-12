@@ -1,6 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule, Http } from '@angular/http';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -30,7 +31,7 @@ import { AuthGuard } from './services/auth-guard.service';
 
 
 @NgModule({
-  declarations: [
+  declarations: [    
     AppComponent,
     CreateListComponent,
     UseListComponent,
@@ -49,7 +50,8 @@ import { AuthGuard } from './services/auth-guard.service';
     SigninComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
+    NgbModule.forRoot(),
     AppRoutingModule,
     FormsModule,
     HttpModule,
