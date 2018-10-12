@@ -1,6 +1,3 @@
-<div class="row">
-
-  <div class="col-xs-12">
     <h3>{{editMode? "Edit shop" : "Add new shop"}}</h3>
     <form (ngSubmit)="onSubmit()" #shopForm="ngForm">
       <div class="form-group">
@@ -8,13 +5,9 @@
         <input type="text" name="shopName" id="shopName" class="form-control" ngModel required>
       </div>
 
-      <div class="row">
-        <div class="col-xs-12">
+
+
           <button class="btn btn-success" type="submit">{{editMode? "Edit" : "Add"}}</button>
-          <br>
-          <br>
-        </div>
-      </div>
+
+
     </form>   
-  </div>
-</div>

@@ -1,12 +1,12 @@
 <h3>Display Shops</h3>
-<div class="row" *ngFor="let shop of shops">
-  <div class="col-xs-7">
-    {{shop.name}}
-  </div>
-  <div class="col-xs-2">
-    <button class="btn btn-default btn-sm" (click)=onEdit(shop)>Edit</button>
-  </div>
-  <div class="col-xs-2">
-    <button class="btn btn-danger btn-sm" (click)=onDelete(shop)>Delete</button>
-  </div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <tr *ngFor="let shop of shops">
+      <td>{{shop.name}}</td>
+      <td><button class="btn btn-success btn-sm" (click)=onEdit(shop)>Edit</button></td>
+      <td><button class="btn btn-danger btn-sm" (click)=onDelete(shop)>Delete</button></td>
+    </tr>
+
+  </table>
 </div>
