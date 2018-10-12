@@ -1,23 +1,27 @@
 <h3>Display Item</h3>
-<table class="table table-striped">
-  <thead>
-    <th>Name</th>
-    <th>Shop</th>
-    <th>Sort</th>
-    <th>Is Repeating</th>    
-    <th></th>
-  </thead>
-  <tbody>
-    <tr *ngFor = "let item of items">
-      <td>{{item.name}}</td>
-      <td>{{item.shop.name}}</td>
-      <td>{{item.sorting}}</td>
-      <td>{{item.isRepeating}}</td>
-      <td>
-        <button class="btn btn-primary" (click) = "onEdit(item)">Edit</button>
-        <button class="btn btn-danger"(click) = "onDelete(item)">Delete</button>
-      </td>      
-    </tr>
-  </tbody>
-</table> 
-
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+          <th>Name</th>
+          <th>Shop</th>
+          <th>Sort</th>
+          <th>Repeat</th>    
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let item of items">
+            <td>{{item.name}}</td>
+            <td>{{item.shop.name}}</td>
+            <td>{{item.sorting}}</td>
+            <td>{{item.isRepeating}}</td>
+            <td>
+              <button class="btn btn-success" (click) = "onEdit(item)">Edit</button>
+             
+            </td>      
+            <td> <button class="btn btn-danger"(click) = "onDelete(item)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table> 
+      
+      
+</div>
