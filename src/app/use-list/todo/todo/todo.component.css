@@ -1,29 +1,22 @@
-#div1, #div2 {
-    float: left;
-    width: 100px;
-    height: 35px;
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid black;
-}
 
 #sorting {
-    width: 65px;
+    width: 80px;
 }
 
 input[type="checkbox"]{
-    width: 30px; /*Desired width*/
+    width: 50px; /*Desired width*/
     height: 30px; /*Desired height*/
   }
+
 
 @media (max-width: 600px) {
     div {
         font-size: 12px;
     }
     #sorting {
-        width: 35px;
-        padding: 1px;
-        font-size: 10px
+        width: 50px;
+        padding: 5px;
+        font-size: 12px
     }
     .btn{
         font-size: 12px
