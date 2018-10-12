@@ -8,46 +8,42 @@
         <option value="all">All Shops</option>                        
         <option *ngFor = "let shop of shops" value={{shop.name}}>{{shop.name}}</option>                        
   </select>          
-</div>          
-<div *ngFor = "let item of items" class="container">
+</div>     
 
-  <div
-      (drop)="drop($event, item)" 
-      (dragover)="allowDrop($event, item)"
-      draggable="true" 
-      (dragstart)="drag($event, item)" 
-      id = {{item._id}}>
-  
-
-        
-  <div class="col-md-2 col-xs-2">
-      <input
-        value = {{item.sorting}}
-        type="number"
-        id = "sorting"
-        class="form-control"
-        (change) = "onSortingChange($event, item)"
-        #sorting
-      />
-  </div>
-  <div class="col-md-1 col-xs-1">
-      <input 
-    type="checkbox"    
-    (click) = "onDone(item)">
-    <span class="checkmark"></span>
-  </div>
-  
-  <div class="col-md-7 col-xs-7">
-      {{item.name}}
-  </div>
-  <div class="col-md-1 col-xs-1">  
-      <button class="btn btn-primary" (click)="onEdit(item)">Edit</button>
+<div class="table-responsive text-center">
+    <div class="table table-striped">
+        <tr *ngFor = "let item of items">
+            <td>
+                <input
+                value = {{item.sorting}}
+                type="number"
+                id = "sorting"
+                class="form-control"
+                (change) = "onSortingChange($event, item)"
+                #sorting
+              />
+            </td>
+            <td>
+                <input 
+                type="checkbox"    
+                (click) = "onDone(item)">
+                <span class="checkmark"></span>
+            </td>
+            <td>
+                {{item.name}}
+            </td>
+            <td><button class="btn btn-primary" (click)="onEdit(item)">Edit</button></td>
+        </tr>
     </div>
-    
 </div>
 
-</div>
+
+
+
+
 <button *ngIf="displayEdit" class="btn btn-primary"(click) = onHide()>Hide</button>
 <div [ngStyle]="{visibility: isVisible}">    
     <app-addedit-items></app-addedit-items>    
 </div>
+
+
