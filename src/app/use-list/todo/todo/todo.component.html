@@ -36,6 +36,7 @@
                 class="form-control"
                 (change) = "onSortingChange($event, item)"
                 #sorting
+                ngbTooltip="Edit copied and original item"
               />
             </td>
             <td>
@@ -47,7 +48,7 @@
             <td align="left">
                 {{item.name}}
             </td>
-            <td><button class="btn btn-success btn-round" (click)="onEdit(item)">Edit</button></td>
+            <td><button class="btn btn-success btn-round" (click)="onEdit(item)" ngbTooltip="Edit copied item only">Edit</button></td>
         </tr>
     </table>
     </div>

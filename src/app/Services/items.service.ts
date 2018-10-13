@@ -11,8 +11,8 @@ export class ItemsService {
   doneEditingAdding = new Subject();
   
   constructor(private http: HttpClient) { }
-  url: string = 'https://frozen-journey-92176.herokuapp.com/'; 
-  //url: string = 'http://localhost:3050/'; 
+  //url: string = 'https://frozen-journey-92176.herokuapp.com/'; 
+  url: string = 'http://localhost:3050/'; 
   
 
   get(path) {
@@ -23,6 +23,11 @@ export class ItemsService {
     return this.http.post<Item[]>(this.url + path, {status: status});      
   }
   
+  getItemByName(status, name) {   
+    console.log(status, name)
+   return this.http.post<Item>(this.url + 'item', {status: status, name: name});
+  }
+    
   newItem(item: Item) {
     return this.http.post(this.url + 'items/new', item);
   }

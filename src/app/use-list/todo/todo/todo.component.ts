@@ -92,8 +92,16 @@ export class TodoComponent implements OnInit, OnDestroy {
     item.sorting = event.target.value;
     this.itemsService.editItem(item)
       .subscribe((res => {
-        this.getItems("Current")
-        this.itemsService.itemsChanged.next();
+        this.itemsService.getItemByName('Permanent', item.name)
+          .subscribe((res) => {
+            console.log(res);
+            res.sorting = item.sorting;
+            this.itemsService.editItem(res)
+              .subscribe(res => {
+                this.getItems("Current")
+                this.itemsService.itemsChanged.next();
+            })            
+        })        
       }));      
   }
 
