@@ -33,7 +33,9 @@ input[type="checkbox"]{
         font-size: 10px
     }
     .btn{
-        font-size: 10px
+        font-size: 8px;
+        width: 30px;
+        padding: 5px;
     }
     td{
         padding: 5px; 
