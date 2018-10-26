@@ -28,10 +28,11 @@ import { DisplayShopsComponent } from './manage-shops/display-shops/display-shop
 import { RegisterComponent } from './auth/register/register.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { ModalComponent } from './shared/modal/modal.component';
 
 
 @NgModule({
-  declarations: [    
+  declarations: [
     AppComponent,
     CreateListComponent,
     UseListComponent,
@@ -39,7 +40,7 @@ import { AuthGuard } from './services/auth-guard.service';
     RepeatingComponent,
     DoneComponent,
     TodoComponent,
-    HeaderComponent,    
+    HeaderComponent,
     ManageItemsComponent,
     DisplayItemsComponent,
     AddeditItemsComponent,
@@ -47,7 +48,8 @@ import { AuthGuard } from './services/auth-guard.service';
     AddeditShopsComponent,
     DisplayShopsComponent,
     RegisterComponent,
-    SigninComponent
+    SigninComponent,
+    ModalComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -61,7 +63,7 @@ import { AuthGuard } from './services/auth-guard.service';
     provide : HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi   : true,
-  },ItemsService, ShopsService, StatusService, AuthService, AuthGuard],
+  }, ItemsService, ShopsService, StatusService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

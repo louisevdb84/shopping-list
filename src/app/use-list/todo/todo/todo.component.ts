@@ -31,8 +31,8 @@ export class TodoComponent implements OnInit, OnDestroy {
     private shopsService: ShopsService,
     private statusService: StatusService) { }
 
-  ngOnInit() {       
-    
+  ngOnInit() {
+
     this.shopsService.getShops()
     .subscribe(
       (res) => {
@@ -40,26 +40,26 @@ export class TodoComponent implements OnInit, OnDestroy {
         this.selectedShop = null;
       },
       (err) => console.log(err));
-    
+
       this.statusService.getStatusList()
       .subscribe(
         (res) => this.status = res.json(),
         (err) => console.log(err));
-    
+
       this.subscription = this.itemsService.itemsChanged
       .subscribe(
-        (res) => this.getItems("Current")
+        (res) => this.getItems('Current')
       );
-    
+
       this.subscription2 = this.itemsService.doneEditingAdding
       .subscribe(
         () => {
-          this.isVisible = "collapse";
+          this.isVisible = 'collapse';
           this.displayEdit = false;
         }
       );
-    
-    this.getItems("Current");    
+
+    this.getItems('Current');
   }
 
   ngOnDestroy() {
@@ -67,89 +67,87 @@ export class TodoComponent implements OnInit, OnDestroy {
     this.subscription2.unsubscribe();
   }
 
-  getItems(status) {    
+  getItems(status) {
     this.itemsService.getItemsByStatus('items', status)
       .subscribe(
-      (res) => {         
+      (res) => {
         if (!this.selectedShop)
         {
           this.items = res;
+        } else {
+          this.items = res.filter(item => item.shop.name === this.selectedShop.name);
         }
-        else {
-          this.items = res.filter(item => item.shop.name === this.selectedShop.name)  
-        }
-        
-      },        
-      (err) => console.log(err));    
+
+      },
+      (err) => console.log(err));
   }
 
-  onShopSelect(event) {        
-    this.selectedShop = this.shops.find(shop => shop.name === event.target.value);     
-    this.getItems("Current");    
+  onShopSelect(event) {
+    this.selectedShop = this.shops.find(shop => shop.name === event.target.value);
+    this.getItems('Current');
   }
 
-  onSortingChange(event, item) {    
+  onSortingChange(event, item) {
     item.sorting = event.target.value;
     this.itemsService.editItem(item)
       .subscribe((res => {
         this.itemsService.getItemByName('Permanent', item.name)
-          .subscribe((res) => {
-            console.log(res);
+          .subscribe((res) => {            
             res.sorting = item.sorting;
             this.itemsService.editItem(res)
               .subscribe(res => {
-                this.getItems("Current")
+                this.getItems('Current');
                 this.itemsService.itemsChanged.next();
-            })            
-        })        
-      }));      
+            });
+        });
+      }));
   }
 
   onDone(item: Item) {
-    item.status = this.status.find(s => s.name === "Done");
+    item.status = this.status.find(s => s.name === 'Done');
     this.itemsService.editItem(item)
       .subscribe((res => {
-        this.getItems("Current")
+        this.getItems('Current');
         this.itemsService.itemsChanged.next();
-      }));        
+      }));
   }
 
-  onEdit(item: Item) {    
+  onEdit(item: Item) {
     this.displayEdit = true;
-    this.isVisible = "visible"
-    this.itemsService.startedEditing.next(item);  
+    this.isVisible = 'visible';
+    this.itemsService.startedEditing.next(item);
     this.itemsService.itemsChanged.next();
   }
 
   onHide() {
-    this.isVisible = "collapse";
+    this.isVisible = 'collapse';
     this.displayEdit = false;
   }
 
   allowDrop(event, item) {
-    //console.log(item);
+    // console.log(item);
     event.preventDefault();
   }
 
-  drag(event,item) {    
-    //console.log(item);
-    event.dataTransfer.setData("item", JSON.stringify(item));
+  drag(event, item) {
+    // console.log(item);
+    event.dataTransfer.setData('item', JSON.stringify(item));
   }
 
-  drop(event, item) {    
+  drop(event, item) {
     console.log(item);
-    //event.preventDefault();
-    var data = event.dataTransfer.getData("item");
+    // event.preventDefault();
+    const data = event.dataTransfer.getData('item');
     console.log(JSON.parse(data));
-    //console.log(event.target)
+    // console.log(event.target)
 
     // item.sorting = 100;
     // this.itemsService.editItem(item)
     //    .subscribe((res => {
     //      this.getItems("Current")
     //      this.itemsService.itemsChanged.next();
-    //    }));      
-    
-    //event.target.appendChild(document.getElementById(data));
+    //    }));
+
+    // event.target.appendChild(document.getElementById(data));
   }
 }
