@@ -1,38 +1,33 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { ItemsService } from 'src/app/Services/items.service';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent {
-  closeResult: string;
-  constructor(private modalService: NgbModal) { }
+export class ModalComponent implements OnInit{    
+    closeResult: string;
+    editMode: boolean =  this.itemService.editMode;
+    subscription: Subscription;
+    constructor(private modalService: NgbModal, private itemService: ItemsService) { }
 
-  open(content, type, modalDimension) {
-    if (modalDimension === 'sm' && type === 'modal_mini') {
-        this.modalService.open(content, { windowClass: 'modal-mini modal-primary', size: 'sm' }).result.then((result) => {
-            this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
-    // tslint:disable-next-line:triple-equals
-    } else if (modalDimension == undefined && type === 'Login') {
-      console.log('login');
-      this.modalService.open(content, { windowClass: 'modal-login modal-primary' }).result.then((result) => {
-          this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
-    } else {
-      console.log('else');
+    ngOnInit(): void {
+    //     this.subscription = this.itemService.startedEditing
+    //   .subscribe(
+    //         () => {                    
+    //             this.editMode = true;
+    //   })  
+    }
+    open(content) {        
         this.modalService.open(content).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
-    }
+    
 
 }
 

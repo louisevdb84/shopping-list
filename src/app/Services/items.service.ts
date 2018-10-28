@@ -9,6 +9,7 @@ export class ItemsService {
   itemsChanged = new Subject();
   startedEditing = new Subject<Item>();
   doneEditingAdding = new Subject();
+  editMode = false;
   
   constructor(private http: HttpClient) { }
   url: string = 'https://frozen-journey-92176.herokuapp.com/'; 

@@ -17,9 +17,8 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
   @ViewChild('itemForm') itemForm: NgForm;  
   @ViewChild('name') name: ElementRef;
   
-  subscription: Subscription;
-  editMode = false;
-  editedItem: Item;
+  subscription: Subscription;  
+  editedItem: Item;  
   
   shops: Shop[];
   status: Status[];
@@ -37,7 +36,7 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
     this.subscription = this.itemsService.startedEditing
       .subscribe(
       (item: Item) => {            
-        this.editMode = true;
+        this.itemsService.editMode = true;
         this.editedItem = item;  
         this.editedItem.shop = this.shops.find(s => s.name === this.editedItem.shop.name);        
         this.itemForm.setValue({
@@ -52,7 +51,7 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
    
   }
 
-  ngDoCheck() {          
+  ngDoCheck() {              
     if (this.itemForm.form.value.itemName === "" || this.itemForm.form.value.itemName === null) {      
       this.itemForm.form.patchValue({      
         shops: this.shops[0],
@@ -85,7 +84,7 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
 
   onSubmit() {            
     const { itemName, shops, sorting, isRepeating, isCurrent } = this.itemForm.value;               
-    if (this.editMode) {
+    if (this.itemsService.editMode) {
       
       this.editedItem.name = itemName;
       this.editedItem.shop = shops;
@@ -95,7 +94,7 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
         .subscribe(
         ()=> this.itemsService.itemsChanged.next()
       )
-      this.editMode = false;
+      this.itemsService.editMode = false;
     }
     else {
       console.log(this.itemForm.value)

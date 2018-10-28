@@ -40,11 +40,14 @@ export class DisplayItemsComponent implements OnInit, OnDestroy {
     this.itemsService.startedEditing.next(item);
   }
 
-  onDelete(item: Item) {
-    this.itemsService.removeItem(item._id)
+  onDelete(item: Item) {    
+    if (confirm("Delete item?")) {
+      this.itemsService.removeItem(item._id)
       .subscribe(
         (res) => this.getItems()
     )
+  } 
+
   }
 
 }
