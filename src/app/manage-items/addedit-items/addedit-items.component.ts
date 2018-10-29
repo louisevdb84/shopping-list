@@ -98,13 +98,13 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
     }
     else {
       console.log(this.itemForm.value)
-      if (isRepeating === "true" || isRepeating) {           
+      if (isRepeating === "true" || isRepeating === true) {           
         let item: Item = new Item(
           null, null, itemName, shops, sorting, isRepeating,
             this.status.find(status => status.name === "Permanent")
         );              
 
-
+          
         this.itemsService.newItem(item)
           .subscribe(
             (res) => this.itemsService.itemsChanged.next(),
@@ -113,10 +113,12 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
       }
       
       if (isCurrent || isRepeating === "false") {
+        
         let item: Item = new Item(
           null, null,itemName, shops, sorting, isRepeating,
             this.status.find(status => status.name === "Current")
         );        
+        console.log(item);
         this.itemsService.newItem(item)
           .subscribe(
             (res) => this.itemsService.itemsChanged.next(),
