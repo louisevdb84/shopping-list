@@ -32,6 +32,7 @@
     "ng2-nouislider": "1.6.1",
     "ngx-chips": "1.6.3",
     "ngx-gallery": "3.1.4",
+    "node-sass": "^6.0.1",
     "nouislider": "9.2.0",
     "popper.js": "1.12.6",
     "rellax": "1.4.0",

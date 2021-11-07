@@ -16,8 +16,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   @ViewChild('shopInput') shopInputRef: ElementRef;
   @ViewChild('sorting') sortingInputRef: ElementRef;
 
-  subscription: Subscription;
-  subscription2: Subscription;
+  subscription: Subscription;  
 
   items: Item[];
   shops: Shop[];
@@ -50,21 +49,11 @@ export class TodoComponent implements OnInit, OnDestroy {
       .subscribe(
         (res) => this.getItems('Current')
       );
-
-      this.subscription2 = this.itemsService.doneEditingAdding
-      .subscribe(
-        () => {
-          this.isVisible = 'collapse';
-          this.displayEdit = false;
-        }
-      );
-
     this.getItems('Current');
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-    this.subscription2.unsubscribe();
+    this.subscription.unsubscribe();    
   }
 
   getItems(status) {
@@ -112,42 +101,5 @@ export class TodoComponent implements OnInit, OnDestroy {
       }));
   }
 
-  onEdit(item: Item) {
-    this.displayEdit = true;
-    this.isVisible = 'visible';
-    this.itemsService.startedEditing.next(item);
-    this.itemsService.itemsChanged.next();
-  }
 
-  onHide() {
-    this.isVisible = 'collapse';
-    this.displayEdit = false;
-  }
-
-  allowDrop(event, item) {
-    // console.log(item);
-    event.preventDefault();
-  }
-
-  drag(event, item) {
-    // console.log(item);
-    event.dataTransfer.setData('item', JSON.stringify(item));
-  }
-
-  drop(event, item) {
-    console.log(item);
-    // event.preventDefault();
-    const data = event.dataTransfer.getData('item');
-    console.log(JSON.parse(data));
-    // console.log(event.target)
-
-    // item.sorting = 100;
-    // this.itemsService.editItem(item)
-    //    .subscribe((res => {
-    //      this.getItems("Current")
-    //      this.itemsService.itemsChanged.next();
-    //    }));
-
-    // event.target.appendChild(document.getElementById(data));
-  }
 }

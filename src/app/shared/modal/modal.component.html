@@ -1,6 +1,7 @@
-<button class="btn btn-info" (click)="open(Notice)">
-   Add
-</button>
+<!-- <button class="btn btn-info" (click)="open(Notice)">
+   Add new item
+</button> -->
+<button class="btn btn-success btn-round" (click)="open(Notice)" ngbTooltip="Edit copied item only">Edit</button>
 <ng-template #Notice let-c="close" let-d="dismiss">
 <div class="modal-header">
     <button type="button" class="close" (click)="d('Cross click')">
@@ -8,6 +9,6 @@
     </button>    
 </div>
 <div class="modal-body">
-    <app-addedit-items></app-addedit-items>
+    <ng-container #TemplateRef [ngTemplateOutlet]="template"></ng-container>
 </div>
 </ng-template>

@@ -52,7 +52,7 @@
                 {{item.name}}
             </td>
             <td>{{item.shop.name}}</td>
-            <td><button class="btn btn-success btn-round" (click)="onEdit(item)" ngbTooltip="Edit copied item only">Edit</button></td>
+            <td><app-modal [editItem]=item></app-modal></td>
         </tr>        
     </table>
     </div>
@@ -61,10 +61,9 @@
 
 
 
-<app-modal></app-modal>
-<button *ngIf="displayEdit" class="btn btn-primary"(click) = onHide()>Hide</button>
-<div [ngStyle]="{visibility: isVisible}">    
-    <app-addedit-items></app-addedit-items>    
-</div>
-
-
+<app-modal>
+    <app-addedit-items></app-addedit-items>
+    <ng-template>
+        <h1>Helloe</h1>
+    </ng-template>
+</app-modal>

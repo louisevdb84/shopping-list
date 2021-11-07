@@ -35,10 +35,12 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
 
     this.subscription = this.itemsService.startedEditing
       .subscribe(
-      (item: Item) => {            
+      (item: Item) => { 
+        console.log(item);
+        
         this.itemsService.editMode = true;
         this.editedItem = item;  
-        this.editedItem.shop = this.shops.find(s => s.name === this.editedItem.shop.name);        
+        this.editedItem.shop = this.shops.find(s => s.name === this.editedItem.shop.name);                
         this.itemForm.setValue({
           itemName: this.editedItem.name,
           shops: this.editedItem.shop,
@@ -46,23 +48,22 @@ export class AddeditItemsComponent implements OnInit, OnDestroy {
           isRepeating: this.editedItem.isRepeating,
           isCurrent: false
         })        
+        console.log(this.itemForm);
       }
     )    
    
   }
 
-  ngDoCheck() {              
-    if (this.itemForm.form.value.itemName === "" || this.itemForm.form.value.itemName === null) {      
-      this.itemForm.form.patchValue({      
-        shops: this.shops[0],
-        isRepeating: true
-      })  
-       this.name.nativeElement.focus();
+  // ngDoCheck() {    
+  //   if (this.itemForm.form.value.itemName === "" || this.itemForm.form.value.itemName === null) {            
+  //     this.itemForm.form.patchValue({      
+  //       shops: this.shops[0],
+  //       isRepeating: true
+  //     })  
+  //      this.name.nativeElement.focus();
       
-    }
-    
-    
-  }
+  //   }
+  // }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
