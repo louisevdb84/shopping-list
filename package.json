@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod --base-href 'https://louisevdb84.github.io/shopping-list/'",
+    "deploy": "ng build --prod --base-href /shopping-list/",
     "deploy2": "ngh --dir dist/shopping-list"
   },
   "private": true,
